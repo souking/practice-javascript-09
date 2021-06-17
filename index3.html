@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var type = 'bar';
+      // var type = 'horizontalBar';
+      // 棒グラフにするにはtypeをbarに変える
+      // 横棒グラフはhorizontalBarに指定
+
+      var data = {
+        labels: [2010, 2011, 2012, 2013],
+        datasets: [{
+          label: '@taguchi',
+          data: [120, 300, 200, 210],
+          backgroundColor: 'skyblue',
+          borderWidth:0
+        }, {
+          label: '@fkoji',
+          data: [180, 250, 320, 500],
+          backgroundColor: [
+            'hsla(90, 60%, 60%, 0.3)',
+            'hsla(180, 60%, 60%, 0.3)',
+            'hsla(270, 60%, 60%, 0.3)',
+            'hsla(360, 60%, 60%, 0.3)',
+          ],
+          borderWidth: 0
+        }]
+        // 枠線を消したい場合はborderWidthを０に指定
+        // またbackgroundColorは配列を指定することができる
+        // ここのバーの色を変えることができる
+        // fkojiさんの色だけが違う
+
+      };
+
+      var options = {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        }
+        // 積み上げグラフにする場合は、optionsのscalesのxAxes方向にstacked: true
+        // yAxesもstacked: trueにすると両方のdataが積み上がる
+
+      };
+
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+      });
+    })();
+  </script>
+</body>
+</html>

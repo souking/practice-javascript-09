@@ -1,0 +1,78 @@
+<!-- #optionの設定
+凡例や、フォントサイズ、アニメーション、タイトルなど
+ここにある事以外に興味がある場合は、ドキュメントを調べてみる-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var type = 'line';
+      var data = {
+        labels: [2010, 2011, 2012, 2013],
+        datasets: [{
+          label: '@taguchi',
+          data: [120, 300, 200, 210]
+        }, {
+          label: '@fkoji',
+          data: [180, 250, 320, 500]
+        }]
+      };
+      var options = {
+        // optionではChart全体の設定ができる
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 400,
+            }
+          }]
+        },
+        title: {
+          display: true,
+          text: 'Annual Sales',
+          fontSize: 18,
+          position: 'left'
+
+          // Chartのタイトルを指定することができる
+          // display: true;で表示するかどうかを決められる
+          // textで表示するタイトルを決められる
+          // fontsizeでフォントのサイズを決めることができる
+          // 左側に表示させたい時はposition: 'left'とする
+        },
+        animation: {
+          duration: 0
+
+          // Chart.jsではデフォルトでグラフがアニメーションしていくのですが
+          // アニメーションを無しにしたい場合は、animationのdurationを0にしてあげる
+          // するとアニメーションの時間を指定することができる
+        },
+        legend: {
+          // position: 'right'
+          display: false
+
+          // 凡例の設定はlegendで設定してあげる
+          // positionをrightにしてあげると右に表示される
+          // 凡例を消したい場合はdisplay: falseとする
+        }
+      };
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+      });
+    })();
+  </script>
+</body>
+</html>

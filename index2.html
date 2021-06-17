@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var type = 'line';
+      var data = {
+        labels: [2010, 2011, 2012, 2013],
+        datasets: [{
+          label: '@taguchi',
+          data: [120, 300, 200, 210],
+          borderColor: 'red',
+          borderWidth: 5,
+          fill: false,
+          pointStyle: 'rect'
+        }, {
+          label: '@fkoji',
+          data: [180, 250, 320, 500],
+          borderColor: 'blue',
+          borderWidth: 5,
+          backgroundColor: 'rgba(0, 0, 255, 0.3)',
+          lineTension: 0,
+          pointStyle: 'triangle'
+
+          // 色の変更はCSSと同じ表現が使えるので
+          // 線の色を変える時はborderColor: 'red'
+          // 線の太さを変えたい時はborderWidthで指定する
+          // 線の下の色はfillで設定できる
+          // 色をなくしたい場合はfalse
+          // 白を変えたい場合は、backgroundColorで指定する
+          // グラフの線を緩やかな曲線ではなく直線でつなげたい場合は
+          // lineTensionを０に指定
+          // またポイントのマークを変える場合はpointStyleを指定する
+          // rectは短形（四角）、triangleは三角
+          // 他にもドキュメントで確認する
+        }]
+      };
+
+      var options = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 400,
+            }
+          }]
+        }
+      };
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<!-- レーダーチャート -->
+
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var type = 'radar';
+      // レーダーチャートにしたい時はradarにしてあげる
+
+      var data = {
+        labels: ['PHP', 'Ruby', 'Python', 'Javascript', 'HTML'],
+        datasets: [{
+          label: '@taguchi',
+          data: [40, 50, 70, 30, 80],
+          borderColor: 'rgba(255, 0, 0, 0.3)'
+        }, {
+          label: '@fkoji',
+          data: [90, 62, 34, 80, 48],
+          backgroundColor: 'rgba(0, 0, 255, 0.3)',
+        }]
+      };
+      // dataでは、プログラミング言語の習熟度のようなものをレーダーチャートに
+      // dataを5つくらい設定すると五角形になる
+      // 値の範囲はoptionsで設定してあげる
+      // minとmaxを使ってあげても良いのだが、最小値の指定で０から始めるという意味の
+      // beginAtZero: trueとしてあげる
+      // レーダーチャートはX軸Y軸があるわけではないのでoptionsのscaleと単数形になっていることに注意
+      
+
+      var options = {
+        scale: {
+          ticks: {
+              // suggestedMin: 0,
+              beginAtZero: true,
+              suggestedMax: 100,
+          }
+        }
+      };
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+      });
+    })();
+  </script>
+</body>
+</html>

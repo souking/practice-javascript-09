@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!-- 円グラフ、ドーナツグラフ -->
+
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      // var type = 'pie';
+      var type = 'doughnut';
+
+      // 円グラフはpie
+      // ドーナツグラフはdoughnut
+
+      var data = {
+        labels: ['YES', 'NO', 'Maybe'],
+        datasets: [{
+          data: [122, 53, 33],
+          backgroundColor: ['tomato', 'skyblue', 'gray']
+        }]
+      };
+
+      // 選択肢がYES,NO,Maybeだとする
+
+
+      var options = {
+        cutoutPercentage: 40
+      };
+
+      // optionsで穴の空き具合を調整できる
+      // cutoutPercentageで調整
+      
+
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+      });
+    })();
+  </script>
+</body>
+</html>
