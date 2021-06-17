@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chart</title>
+</head>
+<body>
+  <canvas id="my_chart">
+    Canvas not supported...
+
+<!-- bodyの中には描画エリアを作る
+chart.jsではcanvasを使っていくので、id属性をつける
+「Canvas not supported...」はcanvasに対応していないブラウザに対するメッセージ -->
+
+  </canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js">
+
+    // Chart.jsが使えるようにscriptを読み込む
+    // Chart.jsと調べる→GetStarted→Installation→CDNJSのリンク→src属性にそこにあるURL圧縮版のscript
+
+  </script>
+  <script>
+    // 描画処理はこのscriptタグの中に書いていく
+
+
+    (function() {
+      'use strict';
+      // (function(){
+      //   これは即時関数という
+      //   中ではuse strictで厳密なエラーチェック
+      // })
+      var type = 'line';
+      // typeをlineにすると折れ線グラフになる
+
+      var data = {
+        labels: [2010, 2011, 2012, 2013],
+        datasets: [{
+          label: '@taguchi',
+          data: [120, 300, 200, 210]
+        }, {
+          label: '@fkoji',
+          // data: [180, 250, 320, 180]
+          data: [180, 250, 320, 500]
+        }]
+      };
+      // dataには2010年〜2013年、までの何らかの売り上げデータをグラフ化
+      // オブジェクト形式でセットしていく
+      // 横軸のラベルを、labelsで定義
+      // dataはdatasetsの中に配列でいくつでも書いていける
+      // 今回はtaguchi君のデータなのでlabel名を決めて、
+      // それぞれの数値はdataで渡す
+      // 2人分のデータを入力するには同じことをすれば良い
+      // ※アニメーションしながらグラフが書ける
+      // 点にホバーすると詳細が見れたり
+      // 凡例をクリックするとデータの表示/非表示を切り替える
+
+
+      var options = {
+        // 軸の範囲を決めるにはChart全体の設定を行うoptionに書いていく
+        // 軸に関してはscalesに書いていく
+        // 今回は縦軸なのでyAxesとする
+        // その中にticksという項目を作り、最大値と最小値を設定（０〜400にした）
+        // 例えば、その最大値を超える数字が入ってきたらグラフが突き抜けてしまうので
+        // minとmaxではなくsuggestedmin、suggestedmaxとすれば軸の範囲は0~400だが、それを超える場合は良い感じに調整してくれる
+        // また、軸を100刻みにしたい時はstepSizeを100としてあげれば良い
+        // また、軸の表現を変えるには（軸の前に文字を入れるなど）
+        // callbackという項目に関数を指定してあげる
+        // 関数はそれぞれ軸の値、その軸が何番目か、全ての軸の値の配列を表現している
+        // 今回は軸の前にJPYとつける
+
+        scales: {
+          yAxes: [{
+            ticks: {
+              // min: 0,
+              // max:400
+              suggestedMin: 0,
+              suggestedMax: 400,
+              stepSize: 100,
+              callback: function(value,index,values) {
+                return 'JPY' + value;
+              }
+            }
+          }]
+        }
+      };
+      // グラフの描画をするためのchartの種類、データ、描画オプションを指定するための変数は、var ~で設定
+
+      var ctx = document.getElementById('my_chart').getContext('2d');
+      // canvasを描画するためのctx(コンテクスト)を取得する
+      // 今回は２Dなのでoptionで2dとする
+
+      var myChart = new Chart(ctx, {
+        type: type,
+        data: data,
+        options: options
+        // new Chartとした後にまずはctxを渡して、その後にtypeとdataとoptionを渡す
+
+
+      });
+    })();
+  </script>
+</body>
+</html>
